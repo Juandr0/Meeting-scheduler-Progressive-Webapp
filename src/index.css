@@ -1,0 +1,49 @@
+:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Bruna färger */
+  --brown-900: #4a2919; /* justera efter behov */
+  --brown-800: #5e381f;
+  --brown-700: #7c4a23;
+}
+
+body {
+  background-color: #fdf9f4;
+  color: var(--brown-900); /* basfärg för text */
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+  color: var(--brown-800);
+}
+
+h2 {
+  color: var(--brown-800);
+}
+
+p {
+  color: var(--brown-900);
+}
+
+a {
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: var(--brown-900);
+}
+
+button {
+  cursor: pointer;
+}

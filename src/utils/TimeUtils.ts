@@ -1,4 +1,4 @@
-function timeStringToDate(timeStr: string): Date {
+export function timeStringToDate(timeStr: string): Date {
   const now = new Date();
   const [hours, minutes] = timeStr.split(':').map(Number);
   return new Date(

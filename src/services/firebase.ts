@@ -47,7 +47,25 @@ export type Booking = {
 
 // Exempelmock med några bokningar för rummet 'r1'
 export const mockBookings: Booking[] = [
+  // Måndag 28 juli 2025
+  { roomId: 'r1', date: '2025-07-28', startTime: '09:00', endTime: '10:00' },
+  { roomId: 'r1', date: '2025-07-28', startTime: '14:00', endTime: '15:00' },
+
+  // Tisdag 29 juli 2025
+  { roomId: 'r1', date: '2025-07-29', startTime: '11:00', endTime: '12:00' },
+
+  // Onsdag 30 juli 2025
+  { roomId: 'r1', date: '2025-07-30', startTime: '13:00', endTime: '14:00' },
+
+  // Torsdag 31 juli 2025
+  { roomId: 'r1', date: '2025-07-31', startTime: '08:00', endTime: '09:00' },
+
+  // Fredag 1 augusti 2025
+  { roomId: 'r1', date: '2025-08-01', startTime: '15:00', endTime: '16:00' },
+
+  // Lördag 2 augusti 2025
+  { roomId: 'r1', date: '2025-08-02', startTime: '10:00', endTime: '11:00' },
+
+  // Söndag 3 augusti 2025
   { roomId: 'r1', date: '2025-08-03', startTime: '09:00', endTime: '10:00' },
-  { roomId: 'r1', date: '2025-08-05', startTime: '13:00', endTime: '14:00' },
-  { roomId: 'r1', date: '2025-08-06', startTime: '11:00', endTime: '12:00' },
 ];

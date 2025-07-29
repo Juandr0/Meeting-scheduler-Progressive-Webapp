@@ -1,4 +1,7 @@
 import type { Room } from '../pages/RoomsPage';
+import type { Booking } from '../types/Booking';
+import type { BookingRaw } from '../types/BookingRaw';
+import { convertBooking } from '../utils/ConvertBooking';
 
 export const mockRooms: Room[] = [
   {
@@ -38,34 +41,27 @@ export const mockRooms: Room[] = [
   },
 ];
 
-export type Booking = {
-  roomId: string;
-  date: string; // t.ex. '2025-08-03' (YYYY-MM-DD)
-  startTime: string; // t.ex. '13:00'
-  endTime: string; // t.ex. '14:00'
-};
+export const mockBookingRaw: BookingRaw[] = [
+  // Rum r1 - Mötesrum Orion
+  { roomId: 'r1', start: '2025-07-28T09:00:00Z', end: '2025-07-28T10:00:00Z' },
+  { roomId: 'r1', start: '2025-07-28T14:00:00Z', end: '2025-07-28T15:00:00Z' },
+  { roomId: 'r1', start: '2025-07-29T11:00:00Z', end: '2025-07-29T12:00:00Z' },
 
-// Exempelmock med några bokningar för rummet 'r1'
-export const mockBookings: Booking[] = [
-  // Måndag 28 juli 2025
-  { roomId: 'r1', date: '2025-07-28', startTime: '09:00', endTime: '10:00' },
-  { roomId: 'r1', date: '2025-07-28', startTime: '14:00', endTime: '15:00' },
+  // Rum r2 - Mötesrum Vega
+  { roomId: 'r2', start: '2025-07-28T08:30:00Z', end: '2025-07-28T09:30:00Z' },
+  { roomId: 'r2', start: '2025-07-30T13:00:00Z', end: '2025-07-30T14:00:00Z' },
 
-  // Tisdag 29 juli 2025
-  { roomId: 'r1', date: '2025-07-29', startTime: '11:00', endTime: '12:00' },
+  // Rum r3 - Mötesrum Sirius
+  { roomId: 'r3', start: '2025-07-31T10:00:00Z', end: '2025-07-31T11:30:00Z' },
+  { roomId: 'r3', start: '2025-08-01T09:00:00Z', end: '2025-08-01T10:00:00Z' },
 
-  // Onsdag 30 juli 2025
-  { roomId: 'r1', date: '2025-07-30', startTime: '13:00', endTime: '14:00' },
+  // Rum r4 - Mötesrum Polaris
+  { roomId: 'r4', start: '2025-08-02T14:00:00Z', end: '2025-08-02T15:00:00Z' },
+  { roomId: 'r4', start: '2025-08-03T08:00:00Z', end: '2025-08-03T09:00:00Z' },
 
-  // Torsdag 31 juli 2025
-  { roomId: 'r1', date: '2025-07-31', startTime: '08:00', endTime: '09:00' },
-
-  // Fredag 1 augusti 2025
-  { roomId: 'r1', date: '2025-08-01', startTime: '15:00', endTime: '16:00' },
-
-  // Lördag 2 augusti 2025
-  { roomId: 'r1', date: '2025-08-02', startTime: '10:00', endTime: '11:00' },
-
-  // Söndag 3 augusti 2025
-  { roomId: 'r1', date: '2025-08-03', startTime: '09:00', endTime: '10:00' },
+  // Rum r5 - Mötesrum Lyra
+  { roomId: 'r5', start: '2025-08-01T00:00:00Z', end: '2025-08-01T01:00:00Z' },
+  { roomId: 'r5', start: '2025-08-03T22:00:00Z', end: '2025-08-03T23:00:00Z' },
 ];
+
+export const mockBookings: Booking[] = mockBookingRaw.map(convertBooking);

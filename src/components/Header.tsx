@@ -17,22 +17,24 @@ export default function Header() {
   };
 
   return (
-    <header className='bg-gray-200 px-4 h-[100px] w-full flex items-center justify-between relative'>
-      <div className='w-[40px]'>
-        {!isHome && (
-          <Link to={AppRoutes.RoomsPage}>
-            <IoChevronBackCircleSharp size={AppSizes.defaultIconSize} />
-          </Link>
-        )}
-      </div>
+    <div className='bg-gray-200'>
+      <header className='px-4 h-[100px] max-w-4xl mx-auto flex items-center justify-between relative'>
+        <div className='w-[40px]'>
+          {!isHome && (
+            <Link to={AppRoutes.RoomsPage}>
+              <IoChevronBackCircleSharp size={AppSizes.defaultIconSize} />
+            </Link>
+          )}
+        </div>
 
-      {/* Center: titel */}
-      <h1 className='absolute left-1/2 transform -translate-x-1/2 text-xl font-semibold'>
-        {getTitleFromPath()}
-      </h1>
+        {/* Center: titel */}
+        <h1 className='absolute left-1/2 transform -translate-x-1/2 text-2xl font-semibold xs:text-3xl sm:text-4xl'>
+          {getTitleFromPath()}
+        </h1>
 
-      {/* placeholder*/}
-      <div className='w-[40px]' />
-    </header>
+        {/* placeholder*/}
+        <div className='w-[40px]' />
+      </header>
+    </div>
   );
 }

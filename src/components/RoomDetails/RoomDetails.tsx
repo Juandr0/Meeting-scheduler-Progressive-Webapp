@@ -4,54 +4,48 @@ import DayColumn from './DayColumn';
 import { mockBookings } from '../../services/firebase';
 import { GenerateTimeSlots } from '../../utils/GenerateTimeSlots';
 import type { Room } from '../../pages/RoomsPage';
-import { GetWeekdayLabel } from '../../utils/GetWeekDayLabel';
-import { GetUniqueDates } from '../../utils/GetUniqueDates';
-import GetWeekNumber from '../../utils/CalculateWeek';
-import GetMonth from '../../utils/GetMonth';
+import TimeFormatter from '../../utils/TimeFormatter';
 
-export default function RoomDetails({ room }: { room: Room }) {
+type Props = {
+  room: Room;
+};
+
+export default function RoomDetails({ room }: Props) {
   const roomBookings = mockBookings.filter((b) => b.roomId === room.id);
-  const uniqueDates = GetUniqueDates(roomBookings);
+
+  if (roomBookings.length === 0) {
+    return <p className='text-center'>Inga lediga tider för detta rum.</p>;
+  }
+
+  const firstBookingDate = getFirstBookingDate(roomBookings);
+  const weekStart = TimeFormatter.getWeekStartDate(firstBookingDate);
+  const weekDates = TimeFormatter.getWeekDates(weekStart);
   const allSlots = GenerateTimeSlots(room.openFrom, room.openTo);
-  const monthStr = GetMonth(uniqueDates[0].split('-')[1]);
-  const firstDay = uniqueDates[0].split('-')[2];
-  const lastDay = uniqueDates[uniqueDates.length - 1].split('-')[2];
+  const headerDate = getHeaderDateRange(weekDates);
 
   return (
-    <div className='overflow-x-auto'>
-      <header className='flex justify-between items-center py-5 px-10'>
-        <button>
-          <MdArrowBackIos size={AppSizes.defaultIconSize} />
-        </button>
-        <div className='flex items-center flex-col'>
-          <h2 className='text-2xl'>
-            {firstDay}-{lastDay} {monthStr}
-          </h2>
-          <h2 className='text-xl'>
-            Vecka {GetWeekNumber(new Date(uniqueDates[0]))}
-          </h2>
-        </div>
-        <button>
-          <MdArrowForwardIos size={AppSizes.defaultIconSize} />
-        </button>
-      </header>
+    <div className='overflow-x-auto flex flex-col items-center'>
+      <Header
+        title={headerDate}
+        week={TimeFormatter.getWeekNumber(firstBookingDate)}
+      />
 
-      <section className='px-2 pb-4'>
-        <div className='flex justify-between gap-2'>
-          {uniqueDates.map((dateStr) => {
-            const currentDay = GetWeekdayLabel(dateStr);
-            const bookedSlots = roomBookings
-              .filter((b) => b.date === dateStr)
-              .map((b) => b.startTime);
+      <section className='px-2 pb-4 w-full flex justify-center'>
+        <div className='flex flex-nowrap gap-2 overflow-x-auto'>
+          {weekDates.map((date) => {
+            const label = date.getDate().toString();
+            const currentDay = TimeFormatter.getWeekdayLabel(date);
+
+            const bookedSlots = getBookedSlotsForDate(roomBookings, date);
             const availableSlots = allSlots.filter(
               (slot) => !bookedSlots.includes(slot)
             );
 
             return (
               <DayColumn
-                key={dateStr}
-                label={currentDay}
-                date={dateStr}
+                key={currentDay}
+                label={label}
+                date={currentDay}
                 times={availableSlots}
               />
             );
@@ -59,5 +53,54 @@ export default function RoomDetails({ room }: { room: Room }) {
         </div>
       </section>
     </div>
+  );
+}
+
+// Helpers
+
+function getFirstBookingDate(bookings: typeof mockBookings) {
+  return bookings
+    .map((b) => b.startTime)
+    .sort((a, b) => a.getTime() - b.getTime())[0];
+}
+
+function getBookedSlotsForDate(bookings: typeof mockBookings, date: Date) {
+  return bookings
+    .filter(
+      (b) =>
+        b.startTime.getFullYear() === date.getFullYear() &&
+        b.startTime.getMonth() === date.getMonth() &&
+        b.startTime.getDate() === date.getDate()
+    )
+    .map((b) => TimeFormatter.formatTime(b.startTime));
+}
+
+function getHeaderDateRange(weekDates: Date[]): string {
+  const first = weekDates[0];
+  const last = weekDates[6];
+  const firstDay = first.getDate();
+  const lastDay = last.getDate();
+  const firstMonth = TimeFormatter.getMonth(first.getMonth());
+  const lastMonth = TimeFormatter.getMonth(last.getMonth());
+
+  return firstMonth === lastMonth
+    ? `${firstDay}-${lastDay} ${firstMonth}`
+    : `${firstDay} ${firstMonth}-${lastDay} ${lastMonth}`;
+}
+
+function Header({ title, week }: { title: string; week: number }) {
+  return (
+    <header className='flex w-full justify-between items-center py-5 px-4 sm:px-10'>
+      <button>
+        <MdArrowBackIos size={AppSizes.defaultIconSize} />
+      </button>
+      <div className='flex items-center flex-col'>
+        <h2 className='text-2xl'>{title}</h2>
+        <h2 className='text-xl'>Vecka {week}</h2>
+      </div>
+      <button>
+        <MdArrowForwardIos size={AppSizes.defaultIconSize} />
+      </button>
+    </header>
   );
 }

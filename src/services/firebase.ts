@@ -10,6 +10,7 @@ export const mockRooms: Room[] = [
     openFrom: '08:00',
     openTo: '18:00',
     description: 'Ett ljust och rymligt rum med plats för 10 personer.',
+    isClosed: false,
   },
   {
     id: 'r2',
@@ -17,6 +18,7 @@ export const mockRooms: Room[] = [
     openFrom: '09:00',
     openTo: '17:00',
     description: 'Modernt rum med videokonferensutrustning.',
+    isClosed: false,
   },
   {
     id: 'r3',
@@ -24,6 +26,7 @@ export const mockRooms: Room[] = [
     openFrom: '07:30',
     openTo: '16:30',
     description: 'Lugnt rum perfekt för brainstorming och workshops.',
+    isClosed: false,
   },
   {
     id: 'r4',
@@ -31,6 +34,7 @@ export const mockRooms: Room[] = [
     openFrom: '10:00',
     openTo: '19:00',
     description: 'Rymligt rum med naturligt ljus och whiteboard.',
+    isClosed: false,
   },
   {
     id: 'r5',
@@ -38,6 +42,32 @@ export const mockRooms: Room[] = [
     openFrom: '00:00',
     openTo: '23:59',
     description: 'Flexibelt rum med möjlighet till sena möten.',
+    isClosed: false,
+  },
+  {
+    id: 'r6',
+    name: 'Mötesrum Altair',
+    openFrom: '08:00',
+    openTo: '18:00',
+    description: 'Kompakt rum med storbildsskärm och HDMI-ingång.',
+    isClosed: false,
+  },
+  {
+    id: 'r7',
+    name: 'Mötesrum Betelgeuse',
+    openFrom: '08:00',
+    openTo: '18:00',
+    description: 'Kreativt rum med post-it-väggar och färgglada möbler.',
+    isClosed: false,
+  },
+  {
+    id: 'r8',
+    name: 'Mötesrum Antares',
+    openFrom: '08:00',
+    openTo: '18:00',
+    description: 'Tillfälligt stängt för underhåll.',
+    isClosed: true,
+    isClosedDescription: 'Service pågår',
   },
 ];
 

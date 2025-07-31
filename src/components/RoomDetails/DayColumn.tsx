@@ -1,22 +1,34 @@
+import { useBooking } from '../../hooks/useBooking';
+import type { Room } from '../../pages/RoomsPage';
+import TimeFormatter from '../../utils/TimeFormatter';
+
 type DayColumnProps = {
-  label: string;
-  date: string;
+  date: Date;
   times: string[];
+  room: Room;
 };
 
-export default function DayColumn({ label, date, times }: DayColumnProps) {
+export default function DayColumn({ date, times, room }: DayColumnProps) {
+  const label = date.getDate().toString();
+  const currentDay = TimeFormatter.getWeekdayLabel(date);
+  const { bookTimeSlot } = useBooking();
+
   return (
-    <div className='flex flex-col items-center min-w-[40px]'>
+    <div className='flex flex-col items-center border-r border-gray-300 last:border-r-0 px-1 xs:px-2 md:px-4 min-w-[40px] xs:w-full  '>
+      <span className='font-bold text-lg'>{currentDay}</span>
       <span className='text-xl'>{label}</span>
-      <span className='font-bold text-lg'>{date}</span>
-      <div className='border-t-1 border-gray-300 w-full' />
-      <div className='flex flex-col gap-3 pt-5'>
+      <div className='border-b border-gray-300 w-full my-2' />
+      <div className='flex flex-col pt-2 gap-4 w-full'>
         {times.map((time) => (
-          <span key={time} className='text-sm xs:text-lg sm:text-xl '>
-            <button className='rounded-sm h-10 w-full bg-green-200 p-1 xs:p-1.5 xs:h-15 sm:p-4'>
-              {time}
-            </button>
-          </span>
+          <button
+            key={time}
+            onClick={() => {
+              bookTimeSlot(room, time, date);
+            }}
+            className='rounded-lg border border-gray-400 h-10 w-full bg-green-100 xs:h-15 p-1 text-[0.8rem] xs:text-md sm:text-lg md:text-xl'
+          >
+            {time}
+          </button>
         ))}
       </div>
     </div>

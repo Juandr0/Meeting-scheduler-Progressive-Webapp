@@ -7,9 +7,42 @@ import type { Room } from '../../pages/RoomsPage';
 import StatusBadge from './StatusBadge';
 
 export default function RoomCard({ room }: { room: Room }) {
-  const { name, openFrom, openTo, id, description } = room;
+  const {
+    name,
+    openFrom,
+    openTo,
+    id,
+    description,
+    isClosed,
+    isClosedDescription,
+  } = room;
   const isOpen = calculateIfOpen(openFrom, openTo);
 
+  if (isClosed) {
+    // Stängt rum. ej klickbart
+    return (
+      <div className='w-full max-w-md rounded-2xl shadow-sm p-4 border border-gray-300 bg-gray-200 text-gray-600 select-none cursor-not-allowed'>
+        <div className='flex flex-col gap-2'>
+          <h2 id={`room-${id}-label`} className='text-lg font-semibold'>
+            {name} (Stängt)
+          </h2>
+          <p id={`room-${id}-desc`} className='text-sm'>
+            {isClosedDescription ?? 'Rummet är tillfälligt stängt.'}
+          </p>
+          <div className='text-sm'>
+            <p>
+              Öppettider:{' '}
+              <span className='font-medium'>
+                {openFrom} – {openTo}
+              </span>
+            </p>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // Vanlig öppen rum-card med länk
   return (
     <Link
       to={AppRoutes.RoomDetailsPage(id)}
@@ -25,7 +58,7 @@ export default function RoomCard({ room }: { room: Room }) {
         <p className='text-sm text-gray-600'>{description}</p>
         <div className='text-sm text-gray-600'>
           <p>
-            Öppet:{' '}
+            Öppettider:{' '}
             <span className='font-medium'>
               {openFrom} – {openTo}
             </span>

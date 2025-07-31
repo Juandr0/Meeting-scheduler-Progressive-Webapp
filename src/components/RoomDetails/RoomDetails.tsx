@@ -14,7 +14,7 @@ export default function RoomDetails({ room }: Props) {
   const roomBookings = mockBookings.filter((b) => b.roomId === room.id);
 
   if (roomBookings.length === 0) {
-    return <p className='text-center'>Inga lediga tider för detta rum.</p>;
+    return <p className='text-center'>Inga tillgängliga tider.</p>;
   }
 
   const firstBookingDate = getFirstBookingDate(roomBookings);
@@ -30,12 +30,9 @@ export default function RoomDetails({ room }: Props) {
         week={TimeFormatter.getWeekNumber(firstBookingDate)}
       />
 
-      <section className='px-2 pb-4 w-full flex justify-center'>
-        <div className='flex flex-nowrap gap-2 overflow-x-auto'>
+      <section className='pb-4 w-full'>
+        <div className='flex flex-nowrap overflow-x-auto  border-gray-300 justify-center'>
           {weekDates.map((date) => {
-            const label = date.getDate().toString();
-            const currentDay = TimeFormatter.getWeekdayLabel(date);
-
             const bookedSlots = getBookedSlotsForDate(roomBookings, date);
             const availableSlots = allSlots.filter(
               (slot) => !bookedSlots.includes(slot)
@@ -43,10 +40,10 @@ export default function RoomDetails({ room }: Props) {
 
             return (
               <DayColumn
-                key={currentDay}
-                label={label}
-                date={currentDay}
+                key={`${room.id}-${date}`}
+                date={date}
                 times={availableSlots}
+                room={room}
               />
             );
           })}
@@ -55,8 +52,6 @@ export default function RoomDetails({ room }: Props) {
     </div>
   );
 }
-
-// Helpers
 
 function getFirstBookingDate(bookings: typeof mockBookings) {
   return bookings

@@ -7,7 +7,7 @@ export default function RoomDetailsPage() {
   const room: Room = location.state?.room;
 
   if (!room) {
-    return <div>Inga rumsdata tillgängliga</div>;
+    return <div>Ingen rumsdata tillgänglig, testa ett annat rum</div>;
   }
 
   return (

@@ -17,7 +17,7 @@ export default function Header() {
   };
 
   return (
-    <div className='bg-gray-200'>
+    <div className='bg-gray-200 absolute top-0 right-0 left-0 h-[100px]'>
       <header className='px-4 h-[100px] max-w-4xl mx-auto flex items-center justify-between relative'>
         <div className='w-[40px]'>
           {!isHome && (

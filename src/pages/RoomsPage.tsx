@@ -7,13 +7,15 @@ export type Room = {
   openFrom: string;
   openTo: string;
   description?: string;
+  isClosed?: boolean;
+  isClosedDescription?: string;
 };
 
 export default function RoomsPage() {
   return (
-    <section className='flex flex-col items-center gap-4 mx-auto'>
+    <section className='flex flex-col items-center gap-4 mx-auto my-5'>
       {mockRooms.map((room) => (
-        <RoomCard room={room} />
+        <RoomCard room={room} key={room.id} />
       ))}
     </section>
   );

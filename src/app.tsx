@@ -6,6 +6,7 @@ import Header from './components/Header';
 
 import { useAppInit } from './hooks/useAppInit';
 import { appRoutes, appSizes } from './constants/constants';
+import LoginPage from './pages/LoginPage';
 
 function App() {
   const { isLoading } = useAppInit();
@@ -28,6 +29,7 @@ function App() {
         style={{ paddingTop: appSizes.headerHeight }}
       >
         <Routes>
+          <Route path={appRoutes.LoginPage} element={<LoginPage />} />
           <Route path={appRoutes.RoomsPage} element={<RoomsPage />} />
           <Route
             path={appRoutes.RoomDetailsPagePath}

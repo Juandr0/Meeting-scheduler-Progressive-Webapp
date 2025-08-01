@@ -51,9 +51,3 @@ export function getWeekDates(weekStartDate: Date): Date[] {
     return d;
   });
 }
-
-export function getCurrentWeekDates(): Date[] {
-  const today = new Date();
-  const start = getWeekStartDate(today);
-  return getWeekDates(start);
-}

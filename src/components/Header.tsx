@@ -1,13 +1,13 @@
 import { useLocation, Link, useMatch } from 'react-router-dom';
-import { AppRoutes } from '../constants/AppRoutes';
+
 import { IoChevronBackCircleSharp } from 'react-icons/io5';
-import { AppSizes } from '../constants/AppSizes';
+import { appRoutes, appSizes } from '../constants/constants';
 
 export default function Header() {
   const location = useLocation();
-  const isHome = location.pathname === AppRoutes.RoomsPage;
+  const isHome = location.pathname === appRoutes.RoomsPage;
 
-  const isDetails = useMatch(AppRoutes.RoomDetailsPagePath);
+  const isDetails = useMatch(appRoutes.RoomDetailsPagePath);
   const roomName = location.state?.room?.name as string | undefined;
 
   const getTitleFromPath = () => {
@@ -21,8 +21,8 @@ export default function Header() {
       <header className='px-4 h-[100px] max-w-4xl mx-auto flex items-center justify-between relative'>
         <div className='w-[40px]'>
           {!isHome && (
-            <Link to={AppRoutes.RoomsPage}>
-              <IoChevronBackCircleSharp size={AppSizes.defaultIconSize} />
+            <Link to={appRoutes.RoomsPage}>
+              <IoChevronBackCircleSharp size={appSizes.defaultIconSize} />
             </Link>
           )}
         </div>

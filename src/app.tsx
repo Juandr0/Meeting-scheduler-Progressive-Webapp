@@ -1,27 +1,41 @@
 import { Route, Routes } from 'react-router-dom';
-import { AppRoutes } from './constants/AppRoutes';
+
 import RoomsPage from './pages/RoomsPage';
 import RoomDetailsPage from './pages/RoomDetailPage';
 import Header from './components/Header';
-import { AppSizes } from './constants/AppSizes';
+
+import { useAppInit } from './hooks/useAppInit';
+import { appRoutes, appSizes } from './constants/constants';
 
 function App() {
+  const { isLoading } = useAppInit();
+
+  if (isLoading)
+    return (
+      <>
+        <Header />
+        <div className='flex flex-col items-center justify-center h-64'>
+          <span className='text-gray-500'>Hämtar mötesrum...</span>
+        </div>
+      </>
+    );
+
   return (
-    <div>
+    <>
       <Header />
       <main
         className='max-w-4xl mx-auto'
-        style={{ paddingTop: AppSizes.headerHeight }}
+        style={{ paddingTop: appSizes.headerHeight }}
       >
         <Routes>
-          <Route path={AppRoutes.RoomsPage} element={<RoomsPage />} />
+          <Route path={appRoutes.RoomsPage} element={<RoomsPage />} />
           <Route
-            path={AppRoutes.RoomDetailsPagePath}
+            path={appRoutes.RoomDetailsPagePath}
             element={<RoomDetailsPage />}
           />
         </Routes>
       </main>
-    </div>
+    </>
   );
 }
 

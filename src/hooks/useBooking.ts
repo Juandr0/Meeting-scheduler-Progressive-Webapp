@@ -5,9 +5,10 @@ import {
   serverTimestamp,
   Timestamp,
 } from 'firebase/firestore';
-import { db } from '../constants/config/firebaseConfig';
-import type { Room } from '../pages/RoomsPage';
-import { FirebasePaths } from '../constants/FirebasePaths';
+import { db } from '../config/firebaseConfig';
+
+import { collections } from '../constants/constants';
+import type { Room } from '../types/Room';
 
 export function useBooking() {
   const bookTimeSlot = async (
@@ -50,7 +51,7 @@ export function useBooking() {
         userId: '',
       };
       const docRef = await addDoc(
-        collection(db, FirebasePaths.bookings),
+        collection(db, collections.bookings),
         newBooking
       );
 

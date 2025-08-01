@@ -1,97 +1,79 @@
-import type { Room } from '../pages/RoomsPage';
 import type { Booking } from '../types/Booking';
-import type { BookingRaw } from '../types/BookingRaw';
-import { convertBooking } from '../utils/ConvertBooking';
 
-export const mockRooms: Room[] = [
+export const mockBookings: Booking[] = [
+  // Mötesrum Orion (tidigare r1)
   {
-    id: 'r1',
-    name: 'Mötesrum Orion',
-    openFrom: '08:00',
-    openTo: '18:00',
-    description: 'Ett ljust och rymligt rum med plats för 10 personer.',
-    isClosed: false,
+    roomId: '2CCyH18dzi5CwMtsdXtI',
+    startTime: new Date('2025-07-28T09:00:00Z'),
+    endTime: new Date('2025-07-28T10:00:00Z'),
+    userId: 'mockUser1',
   },
   {
-    id: 'r2',
-    name: 'Mötesrum Vega',
-    openFrom: '09:00',
-    openTo: '17:00',
-    description: 'Modernt rum med videokonferensutrustning.',
-    isClosed: false,
+    roomId: '2CCyH18dzi5CwMtsdXtI',
+    startTime: new Date('2025-07-28T14:00:00Z'),
+    endTime: new Date('2025-07-28T15:00:00Z'),
+    userId: 'mockUser1',
   },
   {
-    id: 'r3',
-    name: 'Mötesrum Sirius',
-    openFrom: '07:30',
-    openTo: '16:30',
-    description: 'Lugnt rum perfekt för brainstorming och workshops.',
-    isClosed: false,
+    roomId: '2CCyH18dzi5CwMtsdXtI',
+    startTime: new Date('2025-07-29T11:00:00Z'),
+    endTime: new Date('2025-07-29T12:00:00Z'),
+    userId: 'mockUser1',
+  },
+
+  // Mötesrum Vega (tidigare r2)
+  {
+    roomId: 'eCFG0NSZqwC0tJOOo7aD',
+    startTime: new Date('2025-07-28T08:30:00Z'),
+    endTime: new Date('2025-07-28T09:30:00Z'),
+    userId: 'mockUser2',
   },
   {
-    id: 'r4',
-    name: 'Mötesrum Polaris',
-    openFrom: '10:00',
-    openTo: '19:00',
-    description: 'Rymligt rum med naturligt ljus och whiteboard.',
-    isClosed: false,
+    roomId: 'eCFG0NSZqwC0tJOOo7aD',
+    startTime: new Date('2025-07-30T13:00:00Z'),
+    endTime: new Date('2025-07-30T14:00:00Z'),
+    userId: 'mockUser2',
+  },
+
+  // Mötesrum Sirius (tidigare r3)
+  {
+    roomId: 'IbzhwCJbrvgrbNoDiSmF',
+    startTime: new Date('2025-07-31T10:00:00Z'),
+    endTime: new Date('2025-07-31T11:30:00Z'),
+    userId: 'mockUser3',
   },
   {
-    id: 'r5',
-    name: 'Mötesrum Lyra',
-    openFrom: '00:00',
-    openTo: '23:59',
-    description: 'Flexibelt rum med möjlighet till sena möten.',
-    isClosed: false,
+    roomId: 'IbzhwCJbrvgrbNoDiSmF',
+    startTime: new Date('2025-08-01T09:00:00Z'),
+    endTime: new Date('2025-08-01T10:00:00Z'),
+    userId: 'mockUser3',
+  },
+
+  // Mötesrum Polaris (tidigare r4)
+  {
+    roomId: 'JVD5qvB8buxPhVJbYaV5',
+    startTime: new Date('2025-08-02T14:00:00Z'),
+    endTime: new Date('2025-08-02T15:00:00Z'),
+    userId: 'mockUser4',
   },
   {
-    id: 'r6',
-    name: 'Mötesrum Altair',
-    openFrom: '08:00',
-    openTo: '18:00',
-    description: 'Kompakt rum med storbildsskärm och HDMI-ingång.',
-    isClosed: false,
+    roomId: 'JVD5qvB8buxPhVJbYaV5',
+    startTime: new Date('2025-08-03T08:00:00Z'),
+    endTime: new Date('2025-08-03T09:00:00Z'),
+    userId: 'mockUser4',
+  },
+
+  // Mötesrum Lyra (tidigare r5)
+  {
+    roomId: 'ZAgJtoMKNC9bHTKJ3bC0',
+    startTime: new Date('2025-08-01T00:00:00Z'),
+    endTime: new Date('2025-08-01T01:00:00Z'),
+    userId: 'mockUser5',
   },
   {
-    id: 'r7',
-    name: 'Mötesrum Betelgeuse',
-    openFrom: '08:00',
-    openTo: '18:00',
-    description: 'Kreativt rum med post-it-väggar och färgglada möbler.',
-    isClosed: false,
-  },
-  {
-    id: 'r8',
-    name: 'Mötesrum Antares',
-    openFrom: '08:00',
-    openTo: '18:00',
-    description: 'Tillfälligt stängt för underhåll.',
-    isClosed: true,
-    isClosedDescription: 'Service pågår',
+    roomId: 'ZAgJtoMKNC9bHTKJ3bC0',
+    startTime: new Date('2025-08-03T22:00:00Z'),
+    endTime: new Date('2025-08-03T23:00:00Z'),
+    userId: 'mockUser5',
   },
 ];
-
-export const mockBookingRaw: BookingRaw[] = [
-  // Rum r1 - Mötesrum Orion
-  { roomId: 'r1', start: '2025-07-28T09:00:00Z', end: '2025-07-28T10:00:00Z' },
-  { roomId: 'r1', start: '2025-07-28T14:00:00Z', end: '2025-07-28T15:00:00Z' },
-  { roomId: 'r1', start: '2025-07-29T11:00:00Z', end: '2025-07-29T12:00:00Z' },
-
-  // Rum r2 - Mötesrum Vega
-  { roomId: 'r2', start: '2025-07-28T08:30:00Z', end: '2025-07-28T09:30:00Z' },
-  { roomId: 'r2', start: '2025-07-30T13:00:00Z', end: '2025-07-30T14:00:00Z' },
-
-  // Rum r3 - Mötesrum Sirius
-  { roomId: 'r3', start: '2025-07-31T10:00:00Z', end: '2025-07-31T11:30:00Z' },
-  { roomId: 'r3', start: '2025-08-01T09:00:00Z', end: '2025-08-01T10:00:00Z' },
-
-  // Rum r4 - Mötesrum Polaris
-  { roomId: 'r4', start: '2025-08-02T14:00:00Z', end: '2025-08-02T15:00:00Z' },
-  { roomId: 'r4', start: '2025-08-03T08:00:00Z', end: '2025-08-03T09:00:00Z' },
-
-  // Rum r5 - Mötesrum Lyra
-  { roomId: 'r5', start: '2025-08-01T00:00:00Z', end: '2025-08-01T01:00:00Z' },
-  { roomId: 'r5', start: '2025-08-03T22:00:00Z', end: '2025-08-03T23:00:00Z' },
-];
-
-export const mockBookings: Booking[] = mockBookingRaw.map(convertBooking);

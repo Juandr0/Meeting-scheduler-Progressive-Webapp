@@ -1,10 +1,11 @@
 import { IoIosArrowForward } from 'react-icons/io';
-import { AppSizes } from '../../constants/AppSizes';
-import { calculateIfOpen } from '../../utils/TimeUtils';
+
+import { calculateIfOpen } from '../../utils/dateUtils';
 import { Link } from 'react-router-dom';
-import { AppRoutes } from '../../constants/AppRoutes';
-import type { Room } from '../../pages/RoomsPage';
+
 import StatusBadge from './StatusBadge';
+import type { Room } from '../../types/Room';
+import { appRoutes, appSizes } from '../../constants/constants';
 
 export default function RoomCard({ room }: { room: Room }) {
   const {
@@ -45,7 +46,7 @@ export default function RoomCard({ room }: { room: Room }) {
   // Vanlig öppen rum-card med länk
   return (
     <Link
-      to={AppRoutes.RoomDetailsPage(id)}
+      to={appRoutes.RoomDetailsPage(id)}
       state={{ room }}
       aria-label={`Visa detaljer för mötesrummet ${name}`}
       className='w-full max-w-md flex items-center justify-between bg-white rounded-2xl shadow-sm p-4 border border-gray-100 hover:shadow-md transition cursor-pointer no-underline'
@@ -67,7 +68,7 @@ export default function RoomCard({ room }: { room: Room }) {
       </div>
 
       <IoIosArrowForward
-        size={AppSizes.defaultIconSize}
+        size={appSizes.defaultIconSize}
         className='text-gray-400 ml-4 flex-shrink-0'
       />
     </Link>

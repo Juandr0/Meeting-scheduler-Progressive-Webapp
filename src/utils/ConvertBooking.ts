@@ -4,8 +4,10 @@ import type { BookingRaw } from '../types/BookingRaw';
 export function convertBooking(raw: BookingRaw): Booking {
   const newBooking: Booking = {
     roomId: raw.roomId,
-    startTime: new Date(raw.start),
-    endTime: new Date(raw.end),
+    userId: raw.userId,
+    startTime: new Date(raw.startTime.toDate()),
+    endTime: new Date(raw.endTime.toDate()),
+    createdAt: raw.createdAt ? raw.createdAt.toDate() : undefined,
   };
 
   return newBooking;

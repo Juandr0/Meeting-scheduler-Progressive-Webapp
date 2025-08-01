@@ -1,20 +1,13 @@
 import RoomCard from '../components/RoomCard/RoomCard';
-import { mockRooms } from '../services/firebase';
-
-export type Room = {
-  id: string;
-  name: string;
-  openFrom: string;
-  openTo: string;
-  description?: string;
-  isClosed?: boolean;
-  isClosedDescription?: string;
-};
+import { roomsAtom } from '../atoms/roomsAtom';
+import { useAtomValue } from 'jotai';
 
 export default function RoomsPage() {
+  const rooms = useAtomValue(roomsAtom);
+
   return (
     <section className='flex flex-col items-center gap-4 mx-auto my-5'>
-      {mockRooms.map((room) => (
+      {rooms.map((room) => (
         <RoomCard room={room} key={room.id} />
       ))}
     </section>

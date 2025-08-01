@@ -1,5 +1,9 @@
+import { Timestamp } from 'firebase/firestore';
+
 export type BookingRaw = {
   roomId: string;
-  start: string;
-  end: string;
+  startTime: Timestamp;
+  endTime: Timestamp;
+  userId: string;
+  createdAt?: Timestamp;
 };

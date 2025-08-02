@@ -1,3 +1,6 @@
+import { Link } from 'react-router-dom';
+import { appRoutes } from '../constants/constants';
+
 type DropdownMenuProps = {
   onClose: () => void;
   onSignOut: () => void;
@@ -13,13 +16,15 @@ export default function DropdownMenu({
         Inloggad
       </div>
 
-      <button
-        type='button'
+      <Link
+        to={appRoutes.MyBookings}
         className='block w-full text-left px-4 py-2 hover:bg-gray-100 transition-colors duration-150'
-        onClick={onClose} // Stänger menyn, navigering kan ske utanför
+        onClick={() => {
+          onClose();
+        }}
       >
         Mina bokningar
-      </button>
+      </Link>
 
       <button
         type='button'

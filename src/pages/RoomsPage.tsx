@@ -19,7 +19,6 @@ export default function RoomsPage() {
           }
           return a.name.localeCompare(b.name);
         })
-
         .map((room) => (
           <RoomCard room={room} key={room.id} />
         ))}

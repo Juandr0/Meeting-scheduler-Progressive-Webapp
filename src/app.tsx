@@ -7,6 +7,7 @@ import { appRoutes, appSizes } from './constants/constants';
 import LoginPage from './pages/LoginPage';
 import { useAtom } from 'jotai';
 import { authAtom } from './atoms/userAtom';
+import MyBookings from './pages/MyBookings';
 
 function App() {
   const { isLoading } = useAppInit();
@@ -40,6 +41,7 @@ function App() {
             </>
           ) : (
             <>
+              <Route path={appRoutes.MyBookings} element={<MyBookings />} />
               <Route path={appRoutes.RoomsPage} element={<RoomsPage />} />
               <Route
                 path={appRoutes.RoomDetailsPagePath}

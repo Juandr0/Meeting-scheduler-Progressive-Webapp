@@ -1,26 +1,24 @@
-import { Route, Routes } from 'react-router-dom';
-
+import { Route, Routes, Navigate } from 'react-router-dom';
 import RoomsPage from './pages/RoomsPage';
 import RoomDetailsPage from './pages/RoomDetailPage';
 import Header from './components/Header';
-
 import { useAppInit } from './hooks/useAppInit';
 import { appRoutes, appSizes } from './constants/constants';
 import LoginPage from './pages/LoginPage';
+import { useAtom } from 'jotai';
+import { authAtom } from './atoms/userAtom';
 
 function App() {
   const { isLoading } = useAppInit();
+  const [user] = useAtom(authAtom);
 
-  if (isLoading)
+  if (isLoading && user) {
     return (
-      <>
-        <Header />
-        <div className='flex flex-col items-center justify-center h-64'>
-          <span className='text-gray-500'>Hämtar mötesrum...</span>
-        </div>
-      </>
+      <div className='flex flex-col items-center justify-center h-64'>
+        <span className='text-gray-500'>Laddar mötesrum...</span>
+      </div>
     );
-
+  }
   return (
     <>
       <Header />
@@ -29,12 +27,27 @@ function App() {
         style={{ paddingTop: appSizes.headerHeight }}
       >
         <Routes>
-          <Route path={appRoutes.LoginPage} element={<LoginPage />} />
-          <Route path={appRoutes.RoomsPage} element={<RoomsPage />} />
-          <Route
-            path={appRoutes.RoomDetailsPagePath}
-            element={<RoomDetailsPage />}
-          />
+          {!user ? (
+            <>
+              <Route path={appRoutes.LoginPage} element={<LoginPage />} />
+              <Route
+                path='*'
+                element={<Navigate to={appRoutes.LoginPage} replace />}
+              />
+            </>
+          ) : (
+            <>
+              <Route path={appRoutes.RoomsPage} element={<RoomsPage />} />
+              <Route
+                path={appRoutes.RoomDetailsPagePath}
+                element={<RoomDetailsPage />}
+              />
+              <Route
+                path='*'
+                element={<Navigate to={appRoutes.RoomsPage} replace />}
+              />
+            </>
+          )}
         </Routes>
       </main>
     </>

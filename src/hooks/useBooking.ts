@@ -1,4 +1,3 @@
-// hooks/useBooking.ts
 import {
   addDoc,
   collection,
@@ -6,39 +5,41 @@ import {
   Timestamp,
 } from 'firebase/firestore';
 import { db } from '../config/firebaseConfig';
-
+import { formatDate } from '../utils/formatters';
 import { collections } from '../constants/constants';
+import { useAtom } from 'jotai';
+import { authAtom } from '../atoms/userAtom';
 import type { Room } from '../types/Room';
 
 export function useBooking() {
+  const [user] = useAtom(authAtom);
+
   const bookTimeSlot = async (
     room: Room,
-    startTime: string,
+    time: string,
     date: Date,
-    duration: number = 60
+    onBookingSuccess: (time: string) => void
   ) => {
-    const pad = (n: number) => n.toString().padStart(2, '0');
-    const [hourStr, minuteStr] = startTime.split(':');
-    const startHour = +hourStr;
-    const startMinute = +minuteStr;
+    if (!user) {
+      alert('Du måste vara inloggad för att boka.');
+      return;
+    }
 
-    const endTotalMinutes = startHour * 60 + startMinute + duration;
-    const endHour = Math.floor(endTotalMinutes / 60);
-    const endMinute = endTotalMinutes % 60;
-
-    const timeRange = `${pad(startHour)}:${pad(startMinute)}-${pad(
-      endHour
-    )}:${pad(endMinute)}`;
+    const [hourStr] = time.split(':');
+    const startHour = parseInt(hourStr, 10);
 
     const startDate = new Date(date);
-    startDate.setHours(startHour, startMinute, 0, 0);
+    startDate.setHours(startHour, 0, 0, 0);
 
     const endDate = new Date(date);
-    endDate.setHours(endHour, endMinute, 0, 0);
+    endDate.setHours(startHour + 1, 0, 0, 0);
 
-    const confirm = window.confirm(`\n
-      Boka ${room.name} kl ${timeRange}`);
-    if (!confirm) return;
+    const confirmBooking = window.confirm(
+      `Vill du boka ${room.name} ${formatDate(date)} kl ${time}-${
+        startHour + 1
+      }:00?`
+    );
+    if (!confirmBooking) return;
 
     try {
       const newBooking = {
@@ -47,17 +48,17 @@ export function useBooking() {
         startTime: Timestamp.fromDate(startDate),
         endTime: Timestamp.fromDate(endDate),
         createdAt: serverTimestamp(),
-        //TODO: Lägg till UID när auth är implementerat
-        userId: '',
+        userId: user.uid,
       };
-      const docRef = await addDoc(
-        collection(db, collections.bookings),
-        newBooking
+      await addDoc(collection(db, collections.bookings), newBooking);
+      alert(
+        `Bokningen lyckades.
+        \n${room.name} Är nu bokat kl ${time}-${startHour + 1}:00 ${formatDate(
+          date
+        )}`
       );
-
-      console.log('Bokning skapad!', docRef);
+      onBookingSuccess(time);
     } catch (error) {
-      console.error('Fel vid bokning:', error);
       alert('Något gick fel vid bokningen.');
     }
   };

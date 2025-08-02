@@ -30,10 +30,6 @@ h2 {
   color: var(--brown-800);
 }
 
-p {
-  color: var(--brown-900);
-}
-
 a {
   transition: color 0.3s ease;
 }

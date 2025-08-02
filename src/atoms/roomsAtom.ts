@@ -1,4 +1,4 @@
 import { atom } from 'jotai';
-import type { Room } from '../pages/RoomsPage';
+import type { Room } from '../types/Room';
 
 export const roomsAtom = atom<Room[]>([]);

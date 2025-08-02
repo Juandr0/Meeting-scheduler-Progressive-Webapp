@@ -1,6 +1,6 @@
 export const appRoutes = {
-  LoginPage: '/',
-  RoomsPage: '/login-page',
+  LoginPage: '/login-page',
+  RoomsPage: '/',
   RoomDetailsPagePath: '/room/:id',
   RoomDetailsPage: (id: string) => `/room/${id}`,
 };

@@ -1,26 +1,24 @@
 import { useState } from 'react';
 import { FiEye, FiEyeOff } from 'react-icons/fi';
-import { auth } from '../config/firebaseConfig';
-import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
+import { useAtom } from 'jotai';
+import { authAtom } from '../atoms/userAtom';
+import { signIn } from '../services/authService';
 
 export default function LoginPage() {
+  const [, setUser] = useAtom(authAtom);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const [loginError, setLoginError] = useState<string | null>(null);
+  const isFormValid = email.trim() !== '' && password.trim() !== '';
 
-  const handleLogin = () => {
-    const auth = getAuth();
-    createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        // Signed up
-        const user = userCredential.user;
-        // ...
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        // ..
-      });
+  const handleLogin = async () => {
+    const result = await signIn(email, password);
+    if (typeof result !== 'string') {
+      setUser(result);
+    } else {
+      setLoginError(result);
+    }
   };
 
   return (
@@ -40,7 +38,7 @@ export default function LoginPage() {
           />
         </label>
 
-        <label className='block mb-6 relative'>
+        <label className='block mb-2 relative'>
           <span className='text-sm font-medium text-gray-700'>Lösenord</span>
           <input
             type={showPassword ? 'text' : 'password'}
@@ -58,9 +56,18 @@ export default function LoginPage() {
           </button>
         </label>
 
+        {loginError && (
+          <p className='text-sm text-red-600 mb-4'>{loginError}</p>
+        )}
+
         <button
           onClick={handleLogin}
-          className='w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transition-colors'
+          disabled={!isFormValid}
+          className={`w-full font-bold py-2 px-4 rounded-lg transition-colors ${
+            isFormValid
+              ? 'bg-amber-900 hover:bg-amber-950 text-white cursor-pointer'
+              : 'bg-gray-300 text-gray-500 cursor-not-allowed pointer-events-none'
+          }`}
         >
           Logga in
         </button>

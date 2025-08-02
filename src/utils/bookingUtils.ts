@@ -1,14 +1,6 @@
 import type { Booking } from '../types/Booking';
 import { formatTime } from './formatters';
 
-export function getUniqueDates(bookings: Booking[]): string[] {
-  const uniqueDates = Array.from(
-    new Set(bookings.map((b) => b.startTime.toISOString().slice(0, 10)))
-  );
-  uniqueDates.sort();
-  return uniqueDates;
-}
-
 export function getBookedSlotsForDate(
   bookings: Booking[],
   date: Date

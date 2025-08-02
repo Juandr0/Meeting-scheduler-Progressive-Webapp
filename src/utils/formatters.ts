@@ -1,4 +1,4 @@
-import { getMonth, getWeekdayLabel } from './DateUtils';
+import { getMonth, getWeekdayLabel } from './dateUtils';
 
 export function formatTime(date: Date): string {
   return date.toLocaleTimeString('sv-SE', {

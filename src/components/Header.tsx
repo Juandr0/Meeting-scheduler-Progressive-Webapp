@@ -2,8 +2,11 @@ import { useLocation, Link, useMatch } from 'react-router-dom';
 
 import { IoChevronBackCircleSharp } from 'react-icons/io5';
 import { appRoutes, appSizes } from '../constants/constants';
+import { authAtom } from '../atoms/userAtom';
+import { useAtom } from 'jotai';
 
 export default function Header() {
+  const user = useAtom(authAtom);
   const location = useLocation();
   const isHome = location.pathname === appRoutes.RoomsPage;
 
@@ -33,7 +36,17 @@ export default function Header() {
         </h1>
 
         {/* placeholder*/}
-        <div className='w-[40px]' />
+        <div className='flex flex-col items-start space-y-0.5 mr-4 min-w-[150px]'>
+          <p className='text-sm text-gray-700 truncate'>{user[0]?.email}</p>
+          <button
+            onClick={() => {}}
+            className='text-amber-800 hover:text-amber-950 underline focus:outline-none cursor-pointer text-xs font-semibold'
+            aria-label='Gå till Mina bokningar'
+            type='button'
+          >
+            Mina bokningar
+          </button>
+        </div>
       </header>
     </div>
   );

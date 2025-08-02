@@ -6,18 +6,24 @@ import { useAtom } from 'jotai';
 import { roomsAtom } from '../atoms/roomsAtom';
 import type { Room } from '../types/Room';
 import { collections } from '../constants/constants';
+import { authAtom } from '../atoms/userAtom';
 
 export function useAppInit() {
   const [isLoading, setIsLoading] = useState(true);
   const [rooms, setRooms] = useAtom(roomsAtom);
+  const [user] = useAtom(authAtom);
+
+  const shouldFetch = !!user;
 
   useEffect(() => {
+    if (!shouldFetch) return;
     const fetchRooms = async () => {
       try {
         const roomList: Room[] = [];
         const querySnapshot = await getDocs(collection(db, collections.rooms));
         querySnapshot.forEach((doc) => {
-          roomList.push(doc.data() as Room);
+          const data = doc.data();
+          roomList.push(data as Room);
         });
         setRooms(roomList);
       } catch (e) {
@@ -28,7 +34,7 @@ export function useAppInit() {
     };
 
     fetchRooms();
-  }, []);
+  }, [user]);
 
   return { isLoading, rooms };
 }

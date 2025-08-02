@@ -1,5 +1,5 @@
 // src/services/authService.ts
-import { signInWithEmailAndPassword, type User } from 'firebase/auth';
+import { signInWithEmailAndPassword, type User, signOut } from 'firebase/auth';
 import { auth } from '../config/firebaseConfig';
 import { getAuthErrorMessage } from '../utils/auth/authErrorMessages';
 
@@ -17,6 +17,10 @@ export const signIn = async (
   } catch (error: any) {
     return getAuthErrorMessage(error.code);
   }
+};
+
+export const signOutUser = async () => {
+  signOut(auth).then(() => {});
 };
 
 // export const handleSignUp = () => {

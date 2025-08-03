@@ -63,7 +63,7 @@ export default function RoomDetails({ room }: Props) {
         onPrevWeek={goToPreviousWeek}
         onNextWeek={goToNextWeek}
       />
-      <section className='pb-4 w-full'>
+      <section className='pb-4 w-full flex-1'>
         <div className='flex flex-nowrap overflow-x-auto border-gray-300 justify-center'>
           {weekDates.map((date) => {
             const bookedSlots = getBookedSlotsForDate(roomBookings, date);

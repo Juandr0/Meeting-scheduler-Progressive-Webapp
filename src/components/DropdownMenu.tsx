@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom';
 import { appRoutes } from '../constants/constants';
+import { useAtom } from 'jotai';
+import { authAtom } from '../atoms/userAtom';
 
 type DropdownMenuProps = {
   onClose: () => void;
@@ -10,10 +12,11 @@ export default function DropdownMenu({
   onClose,
   onSignOut,
 }: DropdownMenuProps) {
+  const [user] = useAtom(authAtom);
   return (
     <div className='absolute right-0 top-full w-52 bg-white border border-gray-300 rounded-lg shadow-xl z-50'>
       <div className='p-4 border-b border-gray-300 font-semibold text-gray-700'>
-        Inloggad
+        {user?.email}
       </div>
 
       <Link

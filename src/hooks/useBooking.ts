@@ -54,9 +54,9 @@ export function useBooking() {
       await setDoc(docRef, newBooking);
       alert(
         `Bokningen lyckades.
-        \n${room.name} Är nu bokat kl ${time}-${startHour + 1}:00 ${formatDate(
-          date
-        )}`
+        \n${room.name} är nu bokat ${formatDate(date)} kl ${time}-${
+          startHour + 1
+        }:00`
       );
       onBookingSuccess(time);
 

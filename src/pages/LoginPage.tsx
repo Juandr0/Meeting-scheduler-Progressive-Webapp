@@ -13,7 +13,7 @@ export default function LoginPage() {
   const isFormValid = email.trim() !== '' && password.trim() !== '';
 
   const handleLogin = async () => {
-    const result = await signIn(email, password);
+    const result = await signIn(email.trim(), password);
     if (typeof result !== 'string') {
       setUser(result);
     } else {

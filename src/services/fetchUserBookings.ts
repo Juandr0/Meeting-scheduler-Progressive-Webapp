@@ -4,7 +4,7 @@ import type { Booking } from '../types/Booking';
 import { collections } from '../constants/constants';
 
 import type { BookingRaw } from '../types/BookingRaw';
-import { convertBooking } from '../utils/convertBooking';
+import { convertBooking } from '../utils/ConvertBooking';
 
 export const fetchUserBookings = async (userId: string): Promise<Booking[]> => {
   if (!userId) return [];

@@ -15,7 +15,7 @@ export default function DropdownMenu({
   const [user] = useAtom(authAtom);
   return (
     <div className='absolute right-0 top-full w-52 bg-white border border-gray-300 rounded-lg shadow-xl z-50'>
-      <div className='p-4 border-b border-gray-300 font-semibold text-gray-700'>
+      <div className='p-4 border-b border-gray-300 font-semibold text-brown-700'>
         {user?.email}
       </div>
 

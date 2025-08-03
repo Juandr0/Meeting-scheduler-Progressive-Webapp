@@ -6,6 +6,9 @@ export const appRoutes = {
   RoomDetailsPage: (id: string) => `/room/${id}`,
 };
 
+export const appColors = {
+  brown700: '#92400e',
+};
 export const appSizes = {
   defaultIconSize: 40,
   headerHeight: 100,

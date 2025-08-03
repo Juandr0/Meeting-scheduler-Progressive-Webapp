@@ -2,7 +2,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { IoChevronBackCircleSharp, IoMenu, IoClose } from 'react-icons/io5';
 import { useState } from 'react';
 
-import { appRoutes, appSizes } from '../constants/constants';
+import { appColors, appRoutes, appSizes } from '../constants/constants';
 import { authAtom } from '../atoms/userAtom';
 import { useAtom } from 'jotai';
 import { getTitleFromPath } from '../utils/getPageTitle';
@@ -26,13 +26,16 @@ export default function Header() {
   };
 
   return (
-    <div className='bg-gray-200 absolute top-0 right-0 left-0 h-[100px] z-50'>
+    <div className='bg-white shadow-md absolute top-0 right-0 left-0 h-[100px] z-50'>
       <header className='px-4 h-[100px] max-w-4xl mx-auto flex items-center justify-between relative'>
         {/* Back-knapp */}
         <div className='w-[40px]'>
           {shouldShowBackButton && (
             <Link to={appRoutes.RoomsPage}>
-              <IoChevronBackCircleSharp size={appSizes.defaultIconSize} />
+              <IoChevronBackCircleSharp
+                size={appSizes.defaultIconSize}
+                color={appColors.brown700}
+              />
             </Link>
           )}
         </div>
@@ -64,9 +67,15 @@ export default function Header() {
                 type='button'
               >
                 {menuOpen ? (
-                  <IoClose size={appSizes.defaultIconSize} />
+                  <IoClose
+                    size={appSizes.defaultIconSize}
+                    color={appColors.brown700}
+                  />
                 ) : (
-                  <IoMenu size={appSizes.defaultIconSize} />
+                  <IoMenu
+                    size={appSizes.defaultIconSize}
+                    color={appColors.brown700}
+                  />
                 )}
               </button>
             </div>

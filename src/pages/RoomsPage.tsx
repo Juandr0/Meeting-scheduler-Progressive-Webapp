@@ -6,7 +6,7 @@ export default function RoomsPage() {
   const rooms = useAtomValue(roomsAtom);
   rooms.sort;
   return (
-    <section className='flex flex-col items-center gap-4 mx-auto my-5'>
+    <section className='flex flex-col items-center gap-4 mx-auto my-5 px-2 sm:px-0'>
       {rooms
         .slice()
         .sort()

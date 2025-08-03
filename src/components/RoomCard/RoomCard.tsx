@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 import StatusBadge from './StatusBadge';
 import type { Room } from '../../types/Room';
-import { appRoutes, appSizes } from '../../constants/constants';
+import { appColors, appRoutes, appSizes } from '../../constants/constants';
 
 export default function RoomCard({ room }: { room: Room }) {
   const {
@@ -20,7 +20,6 @@ export default function RoomCard({ room }: { room: Room }) {
   const isOpen = calculateIfOpen(openFrom, openTo);
 
   if (isClosed) {
-    // Stängt rum. ej klickbart
     return (
       <div className='w-full max-w-md rounded-2xl shadow-sm p-4 border border-gray-300 bg-gray-200 text-gray-600 select-none cursor-not-allowed'>
         <div className='flex flex-col gap-2'>
@@ -43,7 +42,6 @@ export default function RoomCard({ room }: { room: Room }) {
     );
   }
 
-  // Vanlig öppen rum-card med länk
   return (
     <Link
       to={appRoutes.RoomDetailsPage(id)}
@@ -70,6 +68,7 @@ export default function RoomCard({ room }: { room: Room }) {
       <IoIosArrowForward
         size={appSizes.defaultIconSize}
         className='text-gray-400 ml-4 flex-shrink-0'
+        color={appColors.brown700}
       />
     </Link>
   );

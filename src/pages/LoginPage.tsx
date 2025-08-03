@@ -24,8 +24,6 @@ export default function LoginPage() {
   return (
     <main className='min-h-screen flex items-start justify-center pt-24 px-4 sm:px-0'>
       <section className='w-full max-w-sm p-6 bg-white rounded-2xl shadow-md'>
-        <h1 className='text-2xl font-bold mb-6 text-center'>Logga in</h1>
-
         <label className='block mb-4'>
           <span className='text-sm font-medium text-gray-700'>
             Användarnamn

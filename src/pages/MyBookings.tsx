@@ -47,12 +47,8 @@ export default function MyBookings() {
 
   return (
     <div className='max-w-md mx-auto font-sans mt-6 px-4'>
-      <h2 className='text-2xl font-bold mb-6 text-center text-gray-800'>
-        Mina Bokningar
-      </h2>
-
       {userBookings.length === 0 ? (
-        <p className='text-center text-gray-600'>Inga bokningar än</p>
+        <p className='text-center text-gray-600'>Inga bokningar ännu</p>
       ) : (
         userBookings.map((booking, index) => {
           const start = new Date(booking.startTime);

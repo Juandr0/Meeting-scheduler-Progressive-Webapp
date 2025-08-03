@@ -2,7 +2,7 @@ import { collection, getDocs, query, where } from 'firebase/firestore';
 import { db } from '../config/firebaseConfig';
 import type { Booking } from '../types/Booking';
 import { collections } from '../constants/constants';
-import { convertBooking } from '../utils/convertBooking';
+import { convertBooking } from '../utils/convertBooking.ts';
 import type { BookingRaw } from '../types/BookingRaw';
 
 export const fetchUserBookings = async (userId: string): Promise<Booking[]> => {

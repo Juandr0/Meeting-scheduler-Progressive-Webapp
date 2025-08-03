@@ -8,7 +8,7 @@ import { db } from '../config/firebaseConfig';
 import type { BookingRaw } from '../types/BookingRaw';
 
 import { collections } from '../constants/constants';
-import { convertBooking } from '../utils/ConvertBooking';
+import { convertBooking } from '../utils/convertBooking';
 
 export function useFetchBookings(id: string) {
   const [isLoading, setIsloading] = useState(true);
@@ -24,7 +24,8 @@ export function useFetchBookings(id: string) {
         );
         const querySnapshot = await getDocs(q);
         querySnapshot.forEach((doc) => {
-          const bookingRaw = doc.data() as BookingRaw;
+          var bookingRaw = doc.data() as BookingRaw;
+          bookingRaw.bookingId = doc.id;
           const booking = convertBooking(bookingRaw);
           bookingsList.push(booking);
         });

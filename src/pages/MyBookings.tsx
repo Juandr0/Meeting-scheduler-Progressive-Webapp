@@ -1,17 +1,14 @@
 import { useAtom } from 'jotai';
-import { authAtom } from '../atoms/userAtom';
-import { bookingsAtom } from '../atoms/bookingsAtom';
+import { userBookingAtom } from '../atoms/userBookingsAtom';
 import { roomsAtom } from '../atoms/roomsAtom';
 import { getMonth, getWeekdayLabel } from '../utils/dateUtils';
+import { removeBooking } from '../services/removeBooking';
+import type { Booking } from '../types/Booking';
 
 export default function MyBookings() {
-  const [user] = useAtom(authAtom);
-  const [bookings, setBookings] = useAtom(bookingsAtom);
+  const [userBookings, setUserBookings] = useAtom(userBookingAtom);
   const [rooms] = useAtom(roomsAtom);
-
-  const userBookings = bookings.filter(
-    (booking) => booking.userId === user?.uid
-  );
+  console.log('User bookings:', userBookings);
 
   function getRoomName(roomId: string) {
     const room = rooms.find((r) => r.id === roomId);
@@ -29,18 +26,26 @@ export default function MyBookings() {
     return `${weekday} ${day} ${month} ${hours}:${minutes}`;
   }
 
-  function handleCancel(roomId: string, startTime: Date) {
-    if (!confirm('Vill du verkligen avboka denna tid?')) return;
+  async function handleCancel(booking: Booking) {
+    const confirmDelete = confirm('Vill du verkligen avboka denna tid?');
+    if (!confirmDelete) return;
 
-    const updatedBookings = bookings.filter(
-      (b) =>
-        !(
-          b.roomId === roomId &&
-          new Date(b.startTime).getTime() === new Date(startTime).getTime() &&
-          b.userId === user?.uid
+    try {
+      await removeBooking(booking);
+      setUserBookings((prev) =>
+        prev.filter(
+          (b) =>
+            !(
+              b.roomId === booking.roomId &&
+              new Date(b.startTime).getTime() ===
+                new Date(booking.startTime).getTime() &&
+              b.userId === booking.userId
+            )
         )
-    );
-    setBookings(updatedBookings);
+      );
+    } catch (err) {
+      console.error('Kunde inte ta bort bokningen:', err);
+    }
   }
 
   return (
@@ -50,9 +55,9 @@ export default function MyBookings() {
       {userBookings.length === 0 ? (
         <p>Inga bokningar än</p>
       ) : (
-        userBookings.map(({ roomId, startTime, endTime, createdAt }, index) => (
+        userBookings.map((booking, index) => (
           <div
-            key={`${roomId}-${startTime}-${index}`}
+            key={`${booking.roomId}-${booking.startTime}-${index}`}
             className='relative border border-gray-300 rounded-lg p-4 mb-4 shadow-sm bg-white'
           >
             <button
@@ -60,21 +65,23 @@ export default function MyBookings() {
               aria-label='Avboka bokning'
               title='Avboka bokning'
               className='absolute top-3 right-3 w-7 h-7 rounded-full bg-red-500 text-white text-lg font-bold flex items-center justify-center hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-400'
-              onClick={() => handleCancel(roomId, startTime)}
+              onClick={() => handleCancel(booking)}
             >
               ×
             </button>
 
-            <h3 className='mb-2 font-medium'>Rum: {getRoomName(roomId)}</h3>
+            <h3 className='mb-2 font-medium'>
+              Rum: {getRoomName(booking.roomId)}
+            </h3>
             <p className='mb-1'>
-              Start: <strong>{formatDateTime(startTime)}</strong>
+              Start: <strong>{formatDateTime(booking.startTime)}</strong>
             </p>
             <p className='mb-1'>
-              Slut: <strong>{formatDateTime(endTime)}</strong>
+              Slut: <strong>{formatDateTime(booking.endTime)}</strong>
             </p>
-            {createdAt && (
+            {booking.createdAt && (
               <p className='text-sm text-gray-600'>
-                Bokad: {formatDateTime(createdAt)}
+                Bokad: {formatDateTime(booking.createdAt)}
               </p>
             )}
           </div>

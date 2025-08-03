@@ -7,6 +7,7 @@ import { authAtom } from '../atoms/userAtom';
 import type { Room } from '../types/Room';
 import { userBookingAtom } from '../atoms/userBookingsAtom';
 import type { BookingRaw } from '../types/BookingRaw';
+import { convertBooking } from '../utils/ConvertBooking';
 
 export function useBooking() {
   const [user] = useAtom(authAtom);

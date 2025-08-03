@@ -8,6 +8,7 @@ import { db } from '../config/firebaseConfig';
 import type { BookingRaw } from '../types/BookingRaw';
 
 import { collections } from '../constants/constants';
+import { convertBooking } from '../utils/ConvertBooking';
 
 export function useFetchBookings(id: string) {
   const [isLoading, setIsloading] = useState(true);

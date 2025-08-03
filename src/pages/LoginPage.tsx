@@ -63,7 +63,7 @@ export default function LoginPage() {
           disabled={!isFormValid}
           className={`w-full font-bold py-2 px-4 rounded-lg transition-colors ${
             isFormValid
-              ? 'bg-amber-900 hover:bg-amber-950 text-white cursor-pointer'
+              ? 'bg-brown-700 hover:bg-brown-900 text-white cursor-pointer'
               : 'bg-gray-300 text-gray-500 cursor-not-allowed pointer-events-none'
           }`}
         >

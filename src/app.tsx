@@ -18,7 +18,7 @@ function App() {
       <>
         <Header />
         <div className='flex flex-col items-center justify-center h-64'>
-          <span className='text-gray-500'>Laddar mötesrum...</span>
+          <span className='text-gray-500'>Loading rooms...</span>
         </div>
       </>
     );

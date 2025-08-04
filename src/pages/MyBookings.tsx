@@ -15,7 +15,7 @@ export default function MyBookings() {
 
   function getRoomName(roomId: string) {
     const room = rooms.find((r) => r.id === roomId);
-    return room ? room.name : 'Okänt rum';
+    return room ? room.name : 'Unknown room';
   }
 
   function formatBookingDateRange(start: Date, end: Date) {
@@ -23,7 +23,9 @@ export default function MyBookings() {
   }
 
   async function handleCancel(booking: Booking) {
-    const confirmDelete = confirm('Vill du verkligen avboka denna tid?');
+    const confirmDelete = confirm(
+      'Are you sure you want to cancel this appointment?'
+    );
     if (!confirmDelete) return;
 
     try {
@@ -41,14 +43,14 @@ export default function MyBookings() {
         )
       );
     } catch (err) {
-      console.error('Kunde inte ta bort bokningen:', err);
+      console.error('Could not cancel appointment.\n', err);
     }
   }
 
   return (
     <div className='max-w-md mx-auto font-sans mt-6 px-4'>
       {userBookings.length === 0 ? (
-        <p className='text-center text-gray-600'>Inga bokningar ännu</p>
+        <p className='text-center text-gray-600'>No bookings yet</p>
       ) : (
         userBookings.map((booking, index) => {
           const start = new Date(booking.startTime);

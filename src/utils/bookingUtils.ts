@@ -1,5 +1,5 @@
 import type { Booking } from '../types/Booking';
-import { formatTime } from './formatters';
+import { formatTimeHHmm } from './formatters';
 
 export function getBookedSlotsForDate(
   bookings: Booking[],
@@ -12,7 +12,7 @@ export function getBookedSlotsForDate(
         b.startTime.getMonth() === date.getMonth() &&
         b.startTime.getDate() === date.getDate()
     )
-    .map((b) => formatTime(b.startTime));
+    .map((b) => formatTimeHHmm(b.startTime));
 }
 
 export function generateTimeSlots(openFrom: string, openTo: string): string[] {

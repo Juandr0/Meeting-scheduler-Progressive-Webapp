@@ -21,7 +21,7 @@ export default function RoomHeader({ dates, onPrevWeek, onNextWeek }: Props) {
       </button>
       <div className='flex items-center flex-col'>
         <h2 className='text-2xl'>{title}</h2>
-        <h2 className='text-xl'>Vecka {week}</h2>
+        <h2 className='text-xl'>Week {week}</h2>
       </div>
       <button onClick={onNextWeek}>
         <MdArrowForwardIos size={appSizes.defaultIconSize} />

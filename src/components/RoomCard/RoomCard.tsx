@@ -57,7 +57,7 @@ export default function RoomCard({ room }: { room: Room }) {
         <p className='text-sm text-gray-600'>{description}</p>
         <div className='text-sm text-gray-600'>
           <p>
-            Opening hours::{' '}
+            Opening hours:{' '}
             <span className='font-medium'>
               {openFrom} – {openTo}
             </span>

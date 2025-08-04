@@ -1,16 +1,16 @@
 import { collection, doc, setDoc, Timestamp } from 'firebase/firestore';
 import { db } from '../config/firebaseConfig';
-import { formatDate } from '../utils/formatters';
+import { formatDateString } from '../utils/formatters';
 import { collections } from '../constants/constants';
 import { useAtom } from 'jotai';
-import { authAtom } from '../atoms/userAtom';
+import { userAtom } from '../atoms/userAtom';
 import type { Room } from '../types/Room';
 import { userBookingAtom } from '../atoms/userBookingsAtom';
 import type { BookingRaw } from '../types/BookingRaw';
 import { convertBooking } from '../utils/ConvertBooking';
 
 export function useBooking() {
-  const [user] = useAtom(authAtom);
+  const [user] = useAtom(userAtom);
   const [, setUserBookings] = useAtom(userBookingAtom);
 
   const bookTimeSlot = async (
@@ -35,7 +35,7 @@ export function useBooking() {
 
     const confirmBooking = window.confirm(
       `Confirmation
-      \nBook meeting room ${room.name} ${formatDate(date)} at ${time}-${
+      \nBook meeting room ${room.name} ${formatDateString(date)} at ${time}-${
         startHour + 1
       }:00?`
     );
@@ -55,7 +55,7 @@ export function useBooking() {
       await setDoc(docRef, newBooking);
       alert(
         `Success!
-        \nBooked ${room.name} ${formatDate(date)} at ${time}-${
+        \nBooked ${room.name} ${formatDateString(date)} at ${time}-${
           startHour + 1
         }:00`
       );

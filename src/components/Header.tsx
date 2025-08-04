@@ -3,14 +3,14 @@ import { IoChevronBackCircleSharp, IoMenu, IoClose } from 'react-icons/io5';
 import { useState } from 'react';
 
 import { appColors, appRoutes, appSizes } from '../constants/constants';
-import { authAtom } from '../atoms/userAtom';
+import { userAtom } from '../atoms/userAtom';
 import { useAtom } from 'jotai';
 import { getTitleFromPath } from '../utils/getPageTitle';
 import DropdownMenu from './DropdownMenu';
 import { signOutUser } from '../services/authService';
 
 export default function Header() {
-  const [user, setUser] = useAtom(authAtom);
+  const [user, setUser] = useAtom(userAtom);
   const location = useLocation();
 
   const [menuOpen, setMenuOpen] = useState(false);

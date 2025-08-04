@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { FiEye, FiEyeOff } from 'react-icons/fi';
 import { useAtom } from 'jotai';
-import { authAtom } from '../atoms/userAtom';
+import { userAtom } from '../atoms/userAtom';
 import { signIn } from '../services/authService';
 
 export default function LoginPage() {
-  const [, setUser] = useAtom(authAtom);
+  const [, setUser] = useAtom(userAtom);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);

@@ -4,7 +4,7 @@ import { useFetchBookings } from '../../hooks/useFetchBookings';
 import type { Room } from '../../types/Room';
 import { generateTimeSlots } from '../../utils/bookingUtils';
 
-import { getWeekDates, getWeekStartDate } from '../../utils/dateUtils';
+import { getWeekDates, getMondayOfWeek } from '../../utils/dateUtils';
 import { getBookedSlotsForDate } from '../../utils/bookingUtils';
 
 import DayColumn from './DayColumn';
@@ -20,7 +20,7 @@ export default function RoomDetails({ room }: Props) {
   const [bookings] = useAtom(bookingsAtom);
 
   const [weekStartDate, setWeekStartDate] = useState(() =>
-    getWeekStartDate(new Date())
+    getMondayOfWeek(new Date())
   );
   const weekDates = getWeekDates(weekStartDate);
 
@@ -41,7 +41,7 @@ export default function RoomDetails({ room }: Props) {
   }
 
   if (!hasAvailableSlots) {
-    return <p className='text-center'>Inga tillgängliga tider.</p>;
+    return <p className='text-center'>No timeslots available.</p>;
   }
 
   const goToPreviousWeek = () => {

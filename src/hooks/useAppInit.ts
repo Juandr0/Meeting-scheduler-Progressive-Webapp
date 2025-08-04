@@ -4,7 +4,7 @@ import { collection, getDocs } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import { useAtom } from 'jotai';
 import { roomsAtom } from '../atoms/roomsAtom';
-import { authAtom } from '../atoms/userAtom';
+import { userAtom } from '../atoms/userAtom';
 import { userBookingAtom } from '../atoms/userBookingsAtom';
 import type { Room } from '../types/Room';
 import type { Booking } from '../types/Booking';
@@ -14,7 +14,7 @@ import { fetchUserBookings } from '../services/fetchUserBookings';
 export function useAppInit() {
   const [isLoading, setIsLoading] = useState(true);
   const [rooms, setRooms] = useAtom(roomsAtom);
-  const [user] = useAtom(authAtom);
+  const [user] = useAtom(userAtom);
   const [, setUserBookings] = useAtom(userBookingAtom);
 
   const shouldFetch = !!user;

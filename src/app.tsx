@@ -6,12 +6,12 @@ import { useAppInit } from './hooks/useAppInit';
 import { appRoutes, appSizes } from './constants/constants';
 import LoginPage from './pages/LoginPage';
 import { useAtom } from 'jotai';
-import { authAtom } from './atoms/userAtom';
+import { userAtom } from './atoms/userAtom';
 import MyBookings from './pages/MyBookings';
 
 function App() {
   const { isLoading } = useAppInit();
-  const [user] = useAtom(authAtom);
+  const [user] = useAtom(userAtom);
 
   if (isLoading && user) {
     return (

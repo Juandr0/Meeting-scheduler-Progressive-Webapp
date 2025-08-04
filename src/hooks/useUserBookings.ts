@@ -3,13 +3,13 @@ import { useEffect } from 'react';
 import { useAtom } from 'jotai';
 import { collection, getDocs, query, where } from 'firebase/firestore';
 import { db } from '../config/firebaseConfig';
-import { authAtom } from '../atoms/userAtom';
+import { userAtom } from '../atoms/userAtom';
 import { userBookingAtom } from '../atoms/userBookingsAtom';
 import type { Booking } from '../types/Booking';
 import { collections } from '../constants/constants';
 
 export const useUserBookings = () => {
-  const [user] = useAtom(authAtom);
+  const [user] = useAtom(userAtom);
   const [, setUserBookings] = useAtom(userBookingAtom);
 
   useEffect(() => {

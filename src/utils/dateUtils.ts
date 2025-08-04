@@ -1,6 +1,6 @@
 import { dayNames, monthMap } from '../constants/constants';
 
-export function timeStringToDate(timeStr: string): Date {
+function timeStringToDate(timeStr: string): Date {
   const now = new Date();
   const [hours, minutes] = timeStr.split(':').map(Number);
   return new Date(
@@ -35,7 +35,7 @@ export function getWeekNumber(date: Date): number {
   return Math.floor(diffInDays / 7) + 1;
 }
 
-export function getWeekStartDate(date: Date): Date {
+export function getMondayOfWeek(date: Date): Date {
   const day = date.getDay();
   const diff = day === 0 ? -6 : 1 - day;
   const weekStart = new Date(date);

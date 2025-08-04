@@ -1,13 +1,13 @@
 import { getMonth, getWeekdayLabel } from './dateUtils';
 
-export function formatTime(date: Date): string {
+export function formatTimeHHmm(date: Date): string {
   return date.toLocaleTimeString('sv-SE', {
     hour: '2-digit',
     minute: '2-digit',
   });
 }
 
-export function formatDate(date: Date): string {
+export function formatDateString(date: Date): string {
   const day = date.getDate();
   const monthName = getMonth(date.getMonth());
   const weekday = getWeekdayLabel(date);

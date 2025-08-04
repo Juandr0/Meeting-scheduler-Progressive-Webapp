@@ -16,8 +16,8 @@ export default function DayColumn({
   bookedSlots: bookedSlots,
   room,
 }: DayColumnProps) {
-  const label = date.getDate().toString();
-  const currentDay = getWeekdayLabel(date);
+  const dayLabel = getWeekdayLabel(date);
+  const dateLabel = date.getDate().toString();
   const { bookTimeSlot } = useBooking();
   const [booked, setBooked] = useState(bookedSlots);
 
@@ -26,8 +26,8 @@ export default function DayColumn({
   };
   return (
     <div className='flex flex-col flex-grow items-center border-r border-gray-300 last:border-r-0 px-2 md:px-4 min-w-[40px] xs:w-full'>
-      <span className='font-bold text-lg'>{currentDay}</span>
-      <span className='text-xl'>{label}</span>
+      <span className='font-bold text-lg'>{dayLabel}</span>
+      <span className='text-xl'>{dateLabel}</span>
       <div className='border-b border-gray-300 w-full my-2' />
       <div className='flex flex-col pt-2 gap-2 w-full'>
         {times.map((time) => {

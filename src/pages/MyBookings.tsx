@@ -1,7 +1,7 @@
 import { useAtom } from 'jotai';
 import { userBookingAtom } from '../atoms/userBookingsAtom';
 import { roomsAtom } from '../atoms/roomsAtom';
-import { formatDate, formatTime } from '../utils/formatters';
+import { formatDateString, formatTimeHHmm } from '../utils/formatters';
 import { removeBooking } from '../services/removeBooking';
 import type { Booking } from '../types/Booking';
 
@@ -19,7 +19,9 @@ export default function MyBookings() {
   }
 
   function formatBookingDateRange(start: Date, end: Date) {
-    return `${formatDate(start)} ${formatTime(start)}-${formatTime(end)}`;
+    return `${formatDateString(start)} ${formatTimeHHmm(
+      start
+    )}-${formatTimeHHmm(end)}`;
   }
 
   async function handleCancel(booking: Booking) {
@@ -75,7 +77,8 @@ export default function MyBookings() {
 
                 {createdAt && (
                   <p className='text-xs text-gray-500 mt-1'>
-                    Booked: {formatDate(createdAt)} {formatTime(createdAt)}
+                    Booked: {formatDateString(createdAt)}{' '}
+                    {formatTimeHHmm(createdAt)}
                   </p>
                 )}
               </div>

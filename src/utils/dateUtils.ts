@@ -20,14 +20,17 @@ export function calculateIfOpen(openFrom: string, openTo: string): boolean {
   return now >= fromDate && now <= toDate;
 }
 
+//TODO: Remove. Redundant now that webapp is in en
 export function getMonth(monthIndex: number): string {
   return monthMap[monthIndex] || '';
 }
 
+//TODO: Remove. Redundant now that webapp is in en
 export function getWeekdayLabel(date: Date): string {
   return dayNames[date.getDay()];
 }
 
+//TODO: Learn about and implement iso 8601 date. This fn assumes jan 1 is in week 1.
 export function getWeekNumber(date: Date): number {
   const firstDay = new Date(date.getFullYear(), 0, 1);
   const diffInMs = date.getTime() - firstDay.getTime();

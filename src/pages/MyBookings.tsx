@@ -45,7 +45,7 @@ export default function MyBookings() {
         )
       );
     } catch (err) {
-      console.error('Could not cancel appointment.\n', err);
+      console.error('Could not cancel appointment.\nError:', err);
     }
   }
 

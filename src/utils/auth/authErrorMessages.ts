@@ -1,14 +1,14 @@
 export function getAuthErrorMessage(errorCode: string): string {
   switch (errorCode) {
     case 'auth/invalid-email':
-      return 'Ogiltig e-postadress.';
+      return 'Invalid email address.';
     case 'auth/user-not-found':
     case 'auth/wrong-password':
     case 'auth/invalid-credential':
-      return 'Fel användarnamn eller lösenord.';
+      return 'Incorrect username or password.';
     case 'auth/too-many-requests':
-      return 'För många försök. Försök igen senare.';
+      return 'Too many attempts. Please try again later.';
     default:
-      return 'Ett oväntat fel inträffade. Försök igen.';
+      return 'An unexpected error occurred. Please try again.';
   }
 }

@@ -23,6 +23,9 @@ export const signOutUser = async () => {
   signOut(auth).then(() => {});
 };
 
+// Commented out due to not being used in this version of the webapp.
+// No user should be able to sign up by themselves for now.
+
 // export const handleSignUp = () => {
 //   createUserWithEmailAndPassword(email: string, password: string)
 //     .then((userCredential) => {

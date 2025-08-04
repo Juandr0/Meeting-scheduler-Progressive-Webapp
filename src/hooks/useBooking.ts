@@ -20,7 +20,7 @@ export function useBooking() {
     onBookingSuccess: (time: string) => void
   ) => {
     if (!user) {
-      alert('Du måste vara inloggad för att boka.');
+      alert('You must be logged in to book a room.');
       return;
     }
 

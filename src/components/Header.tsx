@@ -28,7 +28,7 @@ export default function Header() {
   return (
     <div className='bg-white shadow-md absolute top-0 right-0 left-0 h-[100px] z-50'>
       <header className='px-4 h-[100px] max-w-4xl mx-auto flex items-center justify-between relative'>
-        {/* Back-knapp */}
+        {/* Back */}
         <div className='w-[40px]'>
           {shouldShowBackButton && (
             <Link to={appRoutes.RoomsPage}>
@@ -45,7 +45,7 @@ export default function Header() {
           {getTitleFromPath()}
         </h1>
 
-        {/* Högerdel */}
+        {/* Höger */}
         {menuOpen && (
           <DropdownMenu
             onClose={function (): void {
@@ -56,6 +56,8 @@ export default function Header() {
             }}
           />
         )}
+
+        {/* Burgarmeny */}
         <div className='flex items-center justify-end space-x-2 min-w-[40px]'>
           {showHamburgerMenu ? (
             <div className='relative'>

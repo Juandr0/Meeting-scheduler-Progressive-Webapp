@@ -25,9 +25,7 @@ export default function LoginPage() {
     <main className='min-h-screen flex items-start justify-center pt-24 px-4 sm:px-0'>
       <section className='w-full max-w-sm p-6 bg-white rounded-2xl shadow-md'>
         <label className='block mb-4'>
-          <span className='text-sm font-medium text-gray-700'>
-            Användarnamn
-          </span>
+          <span className='text-sm font-medium text-gray-700'>Username</span>
           <input
             type='text'
             value={email}
@@ -37,7 +35,7 @@ export default function LoginPage() {
         </label>
 
         <label className='block mb-2 relative'>
-          <span className='text-sm font-medium text-gray-700'>Lösenord</span>
+          <span className='text-sm font-medium text-gray-700'>Password</span>
           <input
             type={showPassword ? 'text' : 'password'}
             value={password}
@@ -67,7 +65,7 @@ export default function LoginPage() {
               : 'bg-gray-300 text-gray-500 cursor-not-allowed pointer-events-none'
           }`}
         >
-          Logga in
+          Sign in
         </button>
       </section>
     </main>

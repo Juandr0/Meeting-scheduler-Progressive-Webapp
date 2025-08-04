@@ -26,7 +26,7 @@ export default function DropdownMenu({
           onClose();
         }}
       >
-        Mina bokningar
+        My bookings
       </Link>
 
       <button
@@ -37,7 +37,7 @@ export default function DropdownMenu({
           onClose();
         }}
       >
-        Logga ut
+        Sign out
       </button>
     </div>
   );

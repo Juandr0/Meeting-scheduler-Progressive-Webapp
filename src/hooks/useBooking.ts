@@ -34,7 +34,8 @@ export function useBooking() {
     endDate.setHours(startHour + 1, 0, 0, 0);
 
     const confirmBooking = window.confirm(
-      `Vill du boka ${room.name} ${formatDate(date)} kl ${time}-${
+      `Confirmation
+      \nBook meeting room ${room.name} ${formatDate(date)} at ${time}-${
         startHour + 1
       }:00?`
     );
@@ -53,8 +54,8 @@ export function useBooking() {
       };
       await setDoc(docRef, newBooking);
       alert(
-        `Bokningen lyckades.
-        \n${room.name} är nu bokat ${formatDate(date)} kl ${time}-${
+        `Success!
+        \nBooked ${room.name} ${formatDate(date)} at ${time}-${
           startHour + 1
         }:00`
       );
@@ -63,7 +64,7 @@ export function useBooking() {
       const convertedBooking = convertBooking(newBooking);
       setUserBookings((prev) => [...prev, convertedBooking]);
     } catch (error) {
-      alert('Något gick fel vid bokningen.');
+      alert(`An error has occured.\n Error message: ${error}`);
     }
   };
 

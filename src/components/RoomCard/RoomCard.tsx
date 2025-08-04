@@ -24,14 +24,14 @@ export default function RoomCard({ room }: { room: Room }) {
       <div className='w-full max-w-md rounded-2xl shadow-sm p-4 border border-gray-300 bg-gray-200 text-gray-600 select-none cursor-not-allowed'>
         <div className='flex flex-col gap-2'>
           <h2 id={`room-${id}-label`} className='text-lg font-semibold'>
-            {name} (Stängt)
+            {name} (Closed)
           </h2>
           <p id={`room-${id}-desc`} className='text-sm'>
-            {isClosedDescription ?? 'Rummet är tillfälligt stängt.'}
+            {isClosedDescription ?? 'The room is temporarily closed'}
           </p>
           <div className='text-sm'>
             <p>
-              Öppettider:{' '}
+              Opening hours:{' '}
               <span className='font-medium'>
                 {openFrom} – {openTo}
               </span>
@@ -46,7 +46,7 @@ export default function RoomCard({ room }: { room: Room }) {
     <Link
       to={appRoutes.RoomDetailsPage(id)}
       state={{ room }}
-      aria-label={`Visa detaljer för mötesrummet ${name}`}
+      aria-label={`Show details for ${name}`}
       className='w-full max-w-md flex items-center justify-between bg-white rounded-2xl shadow-sm p-4 border border-gray-100 hover:shadow-md transition cursor-pointer no-underline'
     >
       <div className='flex-1 flex flex-col gap-2'>
@@ -57,7 +57,7 @@ export default function RoomCard({ room }: { room: Room }) {
         <p className='text-sm text-gray-600'>{description}</p>
         <div className='text-sm text-gray-600'>
           <p>
-            Öppettider:{' '}
+            Opening hours::{' '}
             <span className='font-medium'>
               {openFrom} – {openTo}
             </span>

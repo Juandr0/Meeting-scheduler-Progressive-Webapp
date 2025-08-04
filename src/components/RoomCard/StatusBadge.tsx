@@ -13,7 +13,7 @@ export default function StatusBadge({ isOpen }: StatusBadgeProps) {
           isOpen ? 'bg-green-500' : 'bg-red-500'
         }`}
       />
-      {isOpen ? 'Öppet' : 'Stängt'}
+      {isOpen ? 'Open' : 'Closed'}
     </div>
   );
 }

@@ -35,7 +35,7 @@ export default function RoomDetails({ room }: Props) {
   if (isLoading) {
     return (
       <div className='flex flex-col items-center justify-center h-64'>
-        <span className='text-gray-500'>Laddar bokningar...</span>
+        <span className='text-gray-500'>Loading bookings...</span>
       </div>
     );
   }

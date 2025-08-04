@@ -19,19 +19,19 @@ export const collections = {
   rooms: 'rooms',
 };
 
-export const dayNames = ['Sön', 'Mån', 'Tis', 'Ons', 'Tor', 'Fre', 'Lör'];
+export const dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
 export const monthMap = [
-  'januari',
-  'februari',
-  'mars',
-  'april',
-  'maj',
-  'juni',
-  'juli',
-  'augusti',
-  'september',
-  'oktober',
-  'november',
-  'december',
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December',
 ] as const;

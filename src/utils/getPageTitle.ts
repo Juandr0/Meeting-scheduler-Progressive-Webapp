@@ -4,11 +4,11 @@ import { appRoutes } from '../constants/constants';
 export function getTitleFromPath(): string {
   const location = useLocation();
   const roomName = (location.state as { room?: { name?: string } })?.room?.name;
-  if (location.pathname === appRoutes.LoginPage) return 'Logga in';
-  if (location.pathname === appRoutes.RoomsPage) return 'Mötesrum';
-  if (location.pathname === appRoutes.MyBookings) return 'Mina bokningar';
+  if (location.pathname === appRoutes.LoginPage) return 'Sign in';
+  if (location.pathname === appRoutes.RoomsPage) return 'Rooms';
+  if (location.pathname === appRoutes.MyBookings) return 'My bookings';
   if (matchPath(appRoutes.RoomDetailsPagePath, location.pathname)) {
-    return roomName || 'Detaljer';
+    return roomName || 'Details';
   }
   return '';
 }

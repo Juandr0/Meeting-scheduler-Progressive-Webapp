@@ -73,7 +73,7 @@ export default function MyBookings() {
 
                 {createdAt && (
                   <p className='text-xs text-gray-500 mt-1'>
-                    Bokad: {formatDate(createdAt)} {formatTime(createdAt)}
+                    Booked: {formatDate(createdAt)} {formatTime(createdAt)}
                   </p>
                 )}
               </div>
@@ -83,7 +83,7 @@ export default function MyBookings() {
                 onClick={() => handleCancel(booking)}
                 className='w-full bg-red-700 text-white py-3 text-sm font-semibold hover:bg-red-800 transition-colors'
               >
-                Avboka tid
+                Cancel appointment
               </button>
             </div>
           );

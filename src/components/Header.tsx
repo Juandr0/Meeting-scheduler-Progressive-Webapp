@@ -62,7 +62,7 @@ export default function Header() {
           {showHamburgerMenu ? (
             <div className='relative'>
               <button
-                aria-label={menuOpen ? 'Stäng meny' : 'Öppna meny'}
+                aria-label={menuOpen ? 'close menu' : 'open menu'}
                 onClick={() => setMenuOpen((open) => !open)}
                 className='text-amber-800 hover:text-amber-950 focus:outline-none transition-colors duration-200
                            w-10 h-10 flex items-center justify-center'
